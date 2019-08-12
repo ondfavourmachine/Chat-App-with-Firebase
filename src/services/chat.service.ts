@@ -29,14 +29,13 @@ export class ChatService {
     const timeStamp = this.getTimeStamp();
     const email = "test@text.com";
     this.chatMessages = this.getMessages();
-    console.log(timeStamp);
     this.chatMessages.push({
       message: msg,
       timeSent: timeStamp,
       userName: 'test-user',
       email: email
     })
-    this.chatMessages.valueChanges().subscribe(res => console.log(res));
+    // this.chatMessages.valueChanges().subscribe(res => console.log(res));
   }
 
 

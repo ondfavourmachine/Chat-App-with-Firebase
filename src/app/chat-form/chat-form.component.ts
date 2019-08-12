@@ -23,6 +23,8 @@ export class ChatFormComponent implements OnInit {
   submit(evt: KeyboardEvent){
     if(evt.keyCode === 13){
       this.sendChat();
+      this.message = '';
+      
     }
     return
   }

@@ -1,6 +1,6 @@
 <input type="text"
 class="chatInput"
 [(ngModel)]="message"
-(keydown)="submit($event)">
+(keydown)="submit($event)" autofocus>
 
 <button class="chatButton" (click)="sendChat()">Send </button>

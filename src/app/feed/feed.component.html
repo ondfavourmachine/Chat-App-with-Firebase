@@ -1,1 +1,5 @@
-<p>feed works!</p>
+<div class="feed">
+    <div *ngFor="let message of feed" class="message">
+        <app-message [chatMessageFromFeed] = "message"></app-message>
+    </div>
+</div>
