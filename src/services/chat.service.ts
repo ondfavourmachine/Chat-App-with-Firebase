@@ -22,17 +22,18 @@ export class ChatService {
         if(auth !== undefined && auth !== null){
           this.user = auth;
         }
+        this.getUser().subscribe(a => this.userName = a.displayName)
       })
      }
 
   sendMessage(msg: string){
     const timeStamp = this.getTimeStamp();
-    const email = "test@text.com";
+    const email = this.user.email;
     this.chatMessages = this.getMessages();
     this.chatMessages.push({
       message: msg,
       timeSent: timeStamp,
-      userName: 'test-user',
+      userName: this.userName ,
       email: email
     })
     // this.chatMessages.valueChanges().subscribe(res => console.log(res));
