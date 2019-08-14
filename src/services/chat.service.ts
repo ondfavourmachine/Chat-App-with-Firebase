@@ -23,12 +23,13 @@ export class ChatService {
           this.user = auth;
         }
         this.getUser().subscribe(a => {
-          console.log(a);
+          // console.log(a);
           this.userName = a.displayName
         })
       })
      }
 
+     // send message
   sendMessage(msg: string){
     const timeStamp = this.getTimeStamp();
     const email = this.user.email;
@@ -43,6 +44,7 @@ export class ChatService {
   }
 
 
+  // get the time of message
   getTimeStamp(): string | Date{
     const now = new Date();
     const date = now.getUTCFullYear() + '/' + (now.getUTCMonth() + 1) + '/' + now.getUTCDate();
@@ -50,21 +52,25 @@ export class ChatService {
     return  new Date(`${date} ${time}`).toLocaleString();
   }
 
-
+  // get all messages from firebase
   getMessages(): AngularFireList<ChatMessage>{
       // create message feed database
     return this.db.list('message', (ref) => ref.limitToLast(25))
   }
 
+
+  // get a user from list of registered users
   getUser(): Observable<any>{
     const userId = this.user.uid;
     const path = `/user/${userId}`;
     return this.db.object(path).valueChanges();
   }
 
+
+  // get all users
   getUsers(): Observable<any>{
     // const userId = this.user.uid;
-    const path = `/users`;
+    const path = `/user`;
     return this.db.list(path).valueChanges()
   }
 }

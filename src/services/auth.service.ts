@@ -20,6 +20,7 @@ export class AuthService {
     private router: Router
   ) {
     this.user = this.afAuth.authState;
+    // console.log(this.user);
    }
 
    get currentUserId(): string{
@@ -67,5 +68,15 @@ export class AuthService {
     const data = {
       status: status,
     }
+  }
+
+
+  authenticatedUser(): Observable<firebase.User>{
+    return this.user;
+  }
+
+  logout(){
+    this.afAuth.auth.signOut();
+    this.router.navigate(['login']);
   }
 }
