@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -11,7 +11,7 @@ import { User } from '../app/models/user-model'
   providedIn: 'root'
 })
 export class ChatService {
- user: any;
+ user: firebase.User;
  chatMessages: AngularFireList<ChatMessage>;
  chatMessage: ChatMessage;
  userName: string;
@@ -22,7 +22,10 @@ export class ChatService {
         if(auth !== undefined && auth !== null){
           this.user = auth;
         }
-        this.getUser().subscribe(a => this.userName = a.displayName)
+        this.getUser().subscribe(a => {
+          console.log(a);
+          this.userName = a.displayName
+        })
       })
      }
 
@@ -33,7 +36,7 @@ export class ChatService {
     this.chatMessages.push({
       message: msg,
       timeSent: timeStamp,
-      userName: this.userName ,
+      userName: this.userName,
       email: email
     })
     // this.chatMessages.valueChanges().subscribe(res => console.log(res));
@@ -51,5 +54,17 @@ export class ChatService {
   getMessages(): AngularFireList<ChatMessage>{
       // create message feed database
     return this.db.list('message', (ref) => ref.limitToLast(25))
+  }
+
+  getUser(): Observable<any>{
+    const userId = this.user.uid;
+    const path = `/user/${userId}`;
+    return this.db.object(path).valueChanges();
+  }
+
+  getUsers(): Observable<any>{
+    // const userId = this.user.uid;
+    const path = `/users`;
+    return this.db.list(path).valueChanges()
   }
 }

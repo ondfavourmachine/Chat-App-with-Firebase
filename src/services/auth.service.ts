@@ -23,7 +23,7 @@ export class AuthService {
    }
 
    get currentUserId(): string{
-     return this.authState !== null ? this.authState.uid : ''
+     return this.authState !== null ? this.authState.user.uid : ''
    }
 
 
@@ -63,7 +63,7 @@ export class AuthService {
 
 
   setUserStatus(status: string){
-    const path = `users/${this.currentUserId}`;
+    const path = `user/${this.currentUserId}`;
     const data = {
       status: status,
     }

@@ -26,8 +26,12 @@ export class SignupFormComponent implements OnInit {
     const password = this.password;
     const displayName = this.displayName;
     
+    // console.log(displayName, password, email);
     this.authservice.signUp(email, password, displayName)
       .then(res => this.router.navigate(['chat']))
       .catch(error => this.errorMsg = error.message );
   }
 }
+
+
+// 
