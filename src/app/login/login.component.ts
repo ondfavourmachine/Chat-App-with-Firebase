@@ -11,15 +11,15 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   errorMsg: string;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
 
   login() {
-    // console.log('login() called from login-form component');
-    this.authService.login(this.email, this.password)
+   
+    this.authservice.login(this.email, this.password)
     .catch(error => this.errorMsg = error.message);
   }
 }

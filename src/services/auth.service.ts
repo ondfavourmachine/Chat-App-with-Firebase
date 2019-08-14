@@ -32,7 +32,9 @@ export class AuthService {
 
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
                 .then(res => {
+                  console.log(res);
                   const status = 'online';
+                  debugger
                   this.setUserStatus(status);
                   this.router.navigate(['chat'])
                 }) 

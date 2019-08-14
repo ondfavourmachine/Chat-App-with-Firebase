@@ -25,7 +25,12 @@ import { AppRoutingModule } from './app-routing.module';
 // services
 import { ChatService } from 'src/services/chat.service';
 import { AuthService } from 'src/services/auth.service';
+
+// environmental variables
 import { environment } from 'src/environments/environment';
+
+// Guards
+import { AuthGuard } from 'src/services/auth.guard';
 
 
 @NgModule({
@@ -50,7 +55,7 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule,
     AppRoutingModule,
   ],
-  providers: [ ChatService, AuthService],
+  providers: [ ChatService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
